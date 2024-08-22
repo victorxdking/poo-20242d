@@ -1,28 +1,43 @@
 package br.edu.fatecfranca;
+
 public class Cliente {
-    public int nroConta, nroAgencia;
-    public String nome;
-    public float saldo;
-    public Cliente(){}
-    public Cliente(int nroConta, int nroAgencia, String nome, float saldo){
-        this.nroConta = nroConta; this.nroAgencia = nroAgencia;
-        this.nome = nome; this.saldo = saldo;
+    private int numeroConta;
+    private int numeroAgencia;
+    private String nome;
+    private float saldo;
+
+    // Construtor padrão
+    public Cliente() {
+        this.numeroConta = 0;
+        this.numeroAgencia = 0;
+        this.nome = "";
+        this.saldo = 0.0f;
     }
-    public void depositar(float x){
-        this.saldo += x;
-        System.out.println("Depósito realizado com sucesso");
+
+    // Construtor sobrecarregado
+    public Cliente(int numeroConta, int numeroAgencia, String nome, float saldo) {
+        this.numeroConta = numeroConta;
+        this.numeroAgencia = numeroAgencia;
+        this.nome = nome;
+        this.saldo = saldo;
     }
-    public void sacar(float x){
-        if (this.saldo - x >= 0) {
-            this.saldo -= x;
-            System.out.println("Saque realizado com sucesso");
+
+    // Método para realizar depósito
+    public void realizarDeposito(float valor) {
+        this.saldo += valor;
+    }
+
+    // Método para realizar saque
+    public void realizarSaque(float valor) {
+        if (valor <= this.saldo) {
+            this.saldo -= valor;
+        } else {
+            System.out.println("Saldo insuficiente para realizar o saque.");
         }
-        else {
-            System.out.println("Saque não realizado, saldo insuficiente");
-        }
     }
-    public String toString(){
-        return "Nro conta: " + this.nroConta + " Nome: " + this.nome +
-                " Saldo: " + this.saldo;
+
+    // Método para retornar o número da conta, nome do cliente e saldo atual
+    public String dadosCliente() {
+        return "Número da Conta: " + this.numeroConta + ", Nome: " + this.nome + ", Saldo Atual: R$ " + this.saldo;
     }
 }
