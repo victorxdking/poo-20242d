@@ -29,9 +29,39 @@ public class ProdutoController {
         }
     }
 
+    @GetMapping("/produtos")
+    public Map<Long, Produto> findAll() {
+        return produtos;
+    }
+
     @PostMapping("/produtos")
     public Produto add(@RequestBody Produto produto) {
         produtos.put(produto.getId(), produto);
         return produto;
+    }
+
+    @DeleteMapping("/produtos/{id}")
+    public String delete(@PathVariable Long id) {
+        Produto produto = produtos.remove(id);
+        if (produto != null) {
+            return "Removido com sucesso";
+        }
+        else {
+            return "Produto não foi encontrado";
+        }
+    }
+
+    @PutMapping("/produtos/{id}")
+    public String update(@PathVariable Long id, @RequestBody Produto produto) {
+        Produto produtoExistente = produtos.get(id);
+        if (produtoExistente != null) {
+            produtoExistente.setNome(produto.getNome());
+            produtoExistente.setPreco(produto.getPreco());
+            produtos.put(id, produtoExistente);
+            return "Produto atualizado com sucesso";
+        }
+        else {
+            return "Produto não existe";
+        }
     }
 }
