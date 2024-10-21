@@ -10,4 +10,3 @@ public class ProdutoDTO {
     private Double preco;
     private String url_imagem;
 }
-
