@@ -39,7 +39,7 @@ public class ProdutoService {
             produtoRepository.delete(produto.get());
             return produto.get();
         }
-        return null;
+        return null; // não encontrou produto para remover
     }
     public Produto atualizar(Long id, ProdutoDTO produtoDTO){
         Optional<Produto> produto = produtoRepository.findById(id);
@@ -48,7 +48,7 @@ public class ProdutoService {
             produto.get().setDescricao(produtoDTO.getDescricao());
             produto.get().setPreco(produtoDTO.getPreco());
             produto.get().setUrl_imagem(produtoDTO.getUrl_imagem());
-            return produtoRepository.save(produto.get());
+            return produtoRepository.save(produto.get()); // atualiza e não cria, pois produto tem ID
         }
         return null;
     }

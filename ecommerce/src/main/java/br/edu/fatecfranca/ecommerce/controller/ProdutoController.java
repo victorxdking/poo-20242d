@@ -16,12 +16,15 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/produtos")
 public class ProdutoController {
+
     @Autowired
     private ProdutoService produtoService;
+
     @GetMapping
     public ResponseEntity<List<Produto>> listarTodos(){
         return new ResponseEntity<>(produtoService.listarTodos(), HttpStatus.OK);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> listarPorId(@PathVariable Long id){
         Optional produto = produtoService.buscarPorId(id);
@@ -40,7 +43,7 @@ public class ProdutoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> remove(@PathVariable Long id){
         Produto aux = produtoService.remove(id);
-        if(aux != null){
+        if ( aux != null) {
             return new ResponseEntity<>(aux, HttpStatus.OK);
         }
         else {
@@ -50,7 +53,7 @@ public class ProdutoController {
     @PatchMapping("/{id}")
     public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody ProdutoDTO produtoDTO){
         Produto aux = produtoService.atualizar(id, produtoDTO);
-        if(aux != null){
+        if ( aux != null) {
             return new ResponseEntity<>(aux, HttpStatus.OK);
         }
         else {
